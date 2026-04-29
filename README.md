@@ -53,7 +53,7 @@ Avance general: 10%
 | Integrante | Código | Correo institucional |
 |---|---:|---|
 | Diego Fabrizio Andia Navarro | 2022073906 | da2022073906@virtual.upt.pe |
-| Hashira Belen Vargas Candia | 2022075480 | hv2022075480@virtual.upt.pe |
+| Hashira Belén Vargas Candia | 2022075480 | hv2022075480@virtual.upt.pe |
 
 ## Resumen del avance
 
@@ -75,7 +75,7 @@ Además, se creó el repositorio en GitHub y se definió la arquitectura inicial
 
 | Integrante | Rol sugerido |
 |---|---|
-| Hashira Belen Vargas Candia | Dev / Desarrolladora |
+| Hashira Belén Vargas Candia | Dev / Desarrolladora |
 | Diego Fabrizio Andia Navarro | Responsable de documentación |
 
 ## Enlace al repositorio
