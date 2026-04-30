@@ -35,12 +35,77 @@ Completar según la implementación del proyecto.
 - Base de datos:
 - Herramientas de desarrollo:
 
+### Stack implementado en este repositorio
+
+- Frontend: HTML5 + CSS3 (diseno moderno tipo dashboard)
+- Backend: PHP 8+
+- Base de datos: MySQL
+- Arquitectura: includes + vistas por seccion + enrutamiento por `$_GET['seccion']`
+
+## Ejecucion local
+
+1. Crear base de datos y tabla:
+
+	```bash
+	mysql -u root -p < database.sql
+	```
+
+2. (Opcional) Configurar variables de entorno para conexion:
+
+	```bash
+	export DB_HOST=127.0.0.1
+	export DB_PORT=3306
+	export DB_NAME=peti_profered
+	export DB_USER=root
+	export DB_PASS=
+	```
+
+3. Levantar servidor PHP en la carpeta del proyecto:
+
+	```bash
+	php -S 0.0.0.0:8000
+	```
+
+4. Abrir en navegador:
+
+	```
+	http://localhost:8000/index.php
+	```
+
 ## Estructura del proyecto
 
 La estructura actual corresponde a una etapa inicial del proyecto. Se presenta una versión básica de referencia:
 
 ```text
 Proyecto-ProfeRed/
+├── assets/
+│   └── css/
+│       └── styles.css
+├── config/
+│   └── secciones.php
+├── includes/
+│   ├── footer.php
+│   └── header.php
+├── views/
+│   ├── home.php
+│   ├── section_form.php
+│   └── sections/
+│       ├── informacion_empresa.php
+│       ├── mision.php
+│       ├── vision.php
+│       ├── valores.php
+│       ├── objetivos.php
+│       ├── foda.php
+│       ├── cadena_valor.php
+│       ├── matriz_participacion.php
+│       ├── porter.php
+│       ├── pest.php
+│       ├── estrategia.php
+│       ├── came.php
+│       └── resumen.php
+├── conexion.php
+├── database.sql
+├── index.php
 └── README.md
 ```
 
