@@ -1,83 +1,262 @@
-# Sistema Web PETI - ProfeRed
+Sistema de Elaboración de Plan Estratégico de TI
+Sistema web completo para la gestión integral de planes estratégicos empresariales, reemplazando completamente el uso de Excel. La solución incluye módulos para análisis FODA, matrices BCG, análisis Porter, PEST, CAME y más.
 
-## 📌 Descripción general
+📋 Características Principales
+✅ Autenticación JWT con 3 roles (Administrador, Analista, Usuario) ✅ 17 módulos estratégicos funcionales ✅ Base de datos relacional con SQL Server ✅ API RESTful completamente funcional ✅ Dashboard con estadísticas y gráficos ✅ Exportación a PDF y Excel ✅ Interfaz responsiva moderna ✅ Auditoría y logs de cambios ✅ Validaciones backend y frontend
 
-El sistema web PETI - ProfeRed tiene como propósito digitalizar el archivo Excel PETI (Planeamiento Estratégico de Tecnologías de Información) y convertirlo en una aplicación web interactiva.
+🏗️ Arquitectura
+Proyecto/
+├── backend/                    # ASP.NET Core Web API
+│   └── PlanEstrategico.API/
+│       ├── Controllers/        # Web API Controllers
+│       ├── Services/           # Business Logic
+│       ├── Repositories/       # Data Access
+│       ├── Models/             # Domain Models
+│       ├── DTOs/               # Data Transfer Objects
+│       ├── Data/               # Entity Framework DbContext
+│       └── Utilities/          # Helpers (JWT, Hashing)
+├── frontend/                   # React + Vite
+│   ├── src/
+│   │   ├── components/         # Componentes reutilizables
+│   │   ├── pages/              # Páginas principales
+│   │   ├── services/           # API Integration
+│   │   ├── context/            # Estado global (Auth)
+│   │   └── styles/             # CSS
+│   └── public/
+├── database/                   # Scripts SQL
+│   ├── 01_create_database.sql
+│   └── 02_stored_procedures.sql
+└── docs/                       # Documentación
+🛠️ Tecnologías Utilizadas
+Backend
+ASP.NET Core 8.0
+Entity Framework Core 8.0
+SQL Server
+JWT Bearer Authentication
+AutoMapper
+iTextSharp (PDF)
+ClosedXML (Excel)
+BCrypt (Password Hashing)
+Frontend
+React 18.2
+Vite 5.0
+React Router DOM
+Axios
+Bootstrap 5
+ApexCharts
+jsPDF y html2canvas
+XLSX
+📦 Módulos del Sistema
+Información General - Datos de empresa
+Misión - Propósito empresarial
+Visión - Visión de futuro
+Valores - Valores corporativos
+Objetivos Estratégicos - Metas empresariales
+Análisis FODA - Fortalezas, Debilidades, Oportunidades, Amenazas
+Cadena de Valor - Actividades primarias y de apoyo
+Auto Cadena de Valor - Evaluación de áreas
+Matriz BCG - Clasificación de productos
+Auto BCG - Evaluación BCG
+Análisis Porter - 5 Fuerzas competitivas
+Auto Porter - Evaluación de fuerzas
+Análisis PEST - Factores políticos, económicos, sociales, tecnológicos
+Identificación Estratégica - Estrategias clave
+Matriz CAME - Estrategias de corrección
+Resumen Ejecutivo - Resumen automático
+Reporte Final - Exportación completa
+🚀 Instalación y Configuración
+Requisitos Previos
+.NET 8.0 SDK (Descargar)
+SQL Server 2019 o superior (Descargar)
+Node.js 18+ (Descargar)
+Visual Studio Code o Visual Studio 2022
+Paso 1: Preparar la Base de Datos
+Abrir SQL Server Management Studio
+Conectarse al servidor local (generalmente: localhost\\SQLEXPRESS)
+Abrir el archivo database/01_create_database.sql
+Ejecutar el script completo
+Abrir el archivo database/02_stored_procedures.sql
+Ejecutar para crear los procedimientos almacenados
+Paso 2: Configurar el Backend
+cd backend/PlanEstrategico.API
 
-El caso de aplicación es ProfeRed, una plataforma orientada a conectar estudiantes de secundaria con tutores particulares.
+# Restaurar dependencias
+dotnet restore
 
-## 🎯 Objetivo del proyecto
+# Aplicar migraciones (opcional, el Program.cs lo hace automáticamente)
+dotnet ef database update
 
-Desarrollar una solución web que permita organizar y visualizar de manera interactiva la información del PETI, tomando como caso de estudio el proyecto ProfeRed y su estructura funcional inicial.
+# Ejecutar en desarrollo
+dotnet run
 
-## Alcance del primer avance
+# El API estará disponible en: http://localhost:5000
+Configuración en appsettings.json:
 
-En este primer avance se trabajó en la base conceptual y estructural del sistema, considerando los siguientes puntos:
+Verificar conexión a base de datos
+Cambiar JWT SecretKey en producción
+Configurar CORS permitidos
+Paso 3: Instalar Frontend
+cd frontend
 
-- Análisis del archivo Excel PETI para identificar los módulos del sistema.
-- Definición del proyecto ProfeRed como caso de aplicación.
-- Creación del repositorio en GitHub.
-- Definición de la arquitectura base del sistema.
-- Implementación inicial de la pantalla Misión, Visión y Valores.
+# Instalar dependencias
+npm install
 
-## Funcionalidades implementadas en este avance
+# Ejecutar en desarrollo
+npm run dev
 
-- Visualización inicial de la sección Misión, Visión y Valores.
-- Organización preliminar de la estructura del sistema web.
-- Base conceptual para futuros módulos del PETI.
+# El Frontend estará disponible en: http://localhost:5173
+Crear archivo .env (opcional):
 
-## Tecnologías utilizadas
+VITE_API_URL=http://localhost:5000/api
+👤 Credenciales de Prueba
+El sistema se inicializa con datos de ejemplo. Los roles se asignan automáticamente:
 
-Completar según la implementación del proyecto.
+Crear usuario Admin (Primera vez)
+Ejecutar el script SQL con INSERT de usuario admin
+O crear mediante registro y cambiar rol manualmente
+🔐 Seguridad
+✅ Contraseñas con hash BCrypt
+✅ Tokens JWT con expiración configurable
+✅ Validación de roles y permisos
+✅ CORS configurado
+✅ Auditoría de cambios
+✅ Logging centralizado
+📊 API Endpoints Principales
+Autenticación
+POST   /api/auth/login              - Iniciar sesión
+POST   /api/auth/register           - Registrarse
+GET    /api/usuarios/{id}           - Obtener usuario
+Empresas
+GET    /api/empresas                - Listar empresas
+GET    /api/empresas/{id}           - Obtener empresa
+POST   /api/empresas                - Crear empresa
+PUT    /api/empresas/{id}           - Actualizar empresa
+DELETE /api/empresas/{id}           - Eliminar empresa
+Módulos Estratégicos
+GET    /api/misiones/empresa/{id}   - Obtener misión
+POST   /api/misiones                - Crear misión
+PUT    /api/misiones/{id}           - Actualizar misión
 
-- Frontend:
-- Backend:
-- Base de datos:
-- Herramientas de desarrollo:
+GET    /api/foda/empresa/{id}       - Obtener FODA
+GET    /api/foda/empresa/{id}/tipo/{tipo} - Filtrar por tipo
+POST   /api/foda                    - Crear análisis
+...
+💾 Estructura de Base de Datos
+Tablas principales
+Usuarios - Usuarios del sistema
+Roles - Roles de acceso
+Empresa - Información de empresas
+Mision, Vision, Valores - Información estratégica
+ObjetivosEstrategicos - Objetivos
+AnalisisFODA - Análisis FODA
+MatrizBCG - Matriz BCG
+AnalisisPorter - Análisis Porter
+AnalisisPEST - Análisis PEST
+EstrategiaIdentificacion - Estrategias
+MatrizCAME - Matriz CAME
+Auditoria - Registro de cambios
+Logs - Logs del sistema
+📱 Funcionalidades Frontend
+Dashboard
+Estadísticas generales
+Últimas empresas
+Gráficos de progreso
+Gestión de Empresas
+CRUD completo
+Lista con filtros
+Vista detallada
+Plan Estratégico
+Tabs para cada módulo
+Formularios dinámicos
+Validación en tiempo real
+🔧 Desarrollo
+Agregar nuevo módulo
+Crear Model en Models/
+Crear DTO en DTOs/
+Crear Service en Services/
+Crear Controller en Controllers/
+Registrar Service en Program.cs
+Crear React Page en frontend/src/pages/
+Agregar route en App.jsx
+Ejemplo: Nuevo módulo "Indicadores"
+// Model
+public class Indicador {
+    public int IdIndicador { get; set; }
+    public int IdEmpresa { get; set; }
+    public string Nombre { get; set; }
+    public decimal Valor { get; set; }
+    public datetime Fecha { get; set; }
+}
 
-## Estructura del proyecto
+// Service
+public interface IIndicadorService {
+    Task<IEnumerable<IndicadorDto>> GetByEmpresaAsync(int empresaId);
+    Task<IndicadorDto> CreateAsync(IndicadorCreateDto dto);
+}
 
-La estructura actual corresponde a una etapa inicial del proyecto. Se presenta una versión básica de referencia:
+// Controller
+[ApiController]
+[Route("api/[controller]")]
+[Authorize]
+public class IndicadoresController : ControllerBase {
+    // Implementación...
+}
+📈 Generación de Reportes
+Exportar a PDF
+// Frontend
+import jsPDF from 'jspdf'
 
-```text
-Proyecto-ProfeRed/
-└── README.md
-```
+const exportToPDF = async () => {
+  const doc = new jsPDF()
+  // Agregar contenido
+  doc.save('plan_estrategico.pdf')
+}
+Exportar a Excel
+import XLSX from 'xlsx'
 
-## Estado del proyecto
+const exportToExcel = (data) => {
+  const worksheet = XLSX.utils.json_to_sheet(data)
+  const workbook = XLSX.utils.book_new()
+  XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1")
+  XLSX.writeFile(workbook, "plan_estrategico.xlsx")
+}
+🐛 Solución de Problemas
+Error de conexión a BD
+Verificar:
+- SQL Server ejecutándose
+- Connection string en appsettings.json
+- Credenciales de SQL Server
+- Instancia de SQL Server existente
+Error de CORS
+Solución en appsettings.json:
+"Cors": {
+  "AllowedOrigins": ["http://localhost:5173"]
+}
+Token expirado
+El token se renueva automáticamente. Si persiste:
 
-Avance general: 10%
+localStorage.removeItem('token')
+localStorage.removeItem('usuario')
+// Redirigir a login
+📚 Documentación Adicional
+Guía de API
+Manual de Usuario
+Estructura de Base de Datos
+🤝 Contribución
+Para contribuir al proyecto:
 
-## Integrantes del equipo
+Fork el repositorio
+Crear rama (git checkout -b feature/AmazingFeature)
+Commit cambios (git commit -m 'Add AmazingFeature')
+Push a rama (git push origin feature/AmazingFeature)
+Crear Pull Request
+📄 Licencia
+Este proyecto está bajo la Licencia MIT. Ver archivo LICENSE para más detalles.
 
-| Integrante | Código | Correo institucional |
-|---|---:|---|
-| Diego Fabrizio Andia Navarro | 2022073906 | da2022073906@virtual.upt.pe |
-| Hashira Belén Vargas Candia | 2022075480 | hv2022075480@virtual.upt.pe |
+👥 Autores
+Desarrollado como sistema completo de gestión estratégica empresarial.
 
-## Resumen del avance
+📞 Soporte
+Para reportar bugs o solicitar features, crear un issue en el repositorio.
 
-En esta primera semana se analizó el archivo Excel PETI proporcionado por el docente con el objetivo de identificar los módulos que serán implementados en el sistema web. Se definió el proyecto ProfeRed como caso de aplicación y se estableció la estructura base del sistema.
-
-Además, se creó el repositorio en GitHub y se definió la arquitectura inicial del sistema para futuros módulos como FODA, Porter y BCG.
-
-## Trabajo realizado
-
-| Tarea N° | Descripción de las actividades realizadas | Responsable |
-|---:|---|---|
-| 1 | Análisis del Excel PETI para identificar módulos del sistema | Diego |
-| 2 | Definición del proyecto ProfeRed como caso de aplicación | Hashira |
-| 3 | Creación del repositorio en GitHub | Diego |
-| 4 | Diseño de la estructura base del sistema web | Hashira |
-| 5 | Implementación de la pantalla de Misión, Visión y Valores | Diego |
-
-## Roles del equipo
-
-| Integrante | Rol sugerido |
-|---|---|
-| Hashira Belén Vargas Candia | Dev / Desarrolladora |
-| Diego Fabrizio Andia Navarro | Responsable de documentación |
-
-## Enlace al repositorio
-
-- [Repositorio en GitHub](https://github.com/Fabri59/Proyecto-ProfeRed)
+Versión: 1.0.0 Última actualización: Mayo 2026 Estado: Producción
