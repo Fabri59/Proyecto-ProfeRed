@@ -4,15 +4,15 @@ Sistema web completo para la gestión integral de planes estratégicos empresari
 
 ## 📋 Características Principales
 
-✅ **Autenticación JWT** con 3 roles (Administrador, Analista, Usuario)
-✅ **17 módulos estratégicos** funcionales
-✅ **Base de datos relacional** con SQL Server
-✅ **API RESTful** completamente funcional
-✅ **Dashboard** con estadísticas y gráficos
-✅ **Exportación** a PDF y Excel
-✅ **Interfaz responsiva** moderna
-✅ **Auditoría y logs** de cambios
-✅ **Validaciones** backend y frontend
+ - **Autenticación JWT** con 3 roles (Administrador, Analista, Usuario)
+ - **17 módulos estratégicos** funcionales
+ - **Base de datos relacional** con SQL Server
+ - **API RESTful** completamente funcional
+ - **Dashboard** con estadísticas y gráficos
+ - **Exportación** a PDF y Excel
+ - **Interfaz responsiva** moderna
+ - **Auditoría y logs** de cambios
+ - **Validaciones** backend y frontend
 
 ## 🏗️ Arquitectura
 
