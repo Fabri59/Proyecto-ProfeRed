@@ -1,0 +1,26 @@
+@model Proyecto_Red.Models.Vision
+
+@{
+    ViewData["Title"] = "Nueva Visión";
+}
+
+<div class="mb-4">
+    <h1 class="display-6 fw-bold">Nueva Visión</h1>
+    <p class="text-muted">Describe la visión a futuro del plan estratégico TI.</p>
+</div>
+
+<form asp-action="CreateVision" method="post">
+    <div class="mb-3">
+        <label asp-for="Descripcion" class="form-label">Visión</label>
+        <textarea asp-for="Descripcion" class="form-control" rows="5"></textarea>
+        <span asp-validation-for="Descripcion" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-success">
+        <i class="fas fa-save me-2"></i> Guardar visión
+    </button>
+    <a asp-action="Estrategia" class="btn btn-secondary ms-2">Cancelar</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

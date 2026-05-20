@@ -1,0 +1,51 @@
+@model Proyecto_Red.Models.ObjetivoEstrategico
+
+@{
+    ViewData["Title"] = "Nuevo Objetivo Estratégico";
+}
+
+<div class="mb-4">
+    <h1 class="display-6 fw-bold">Nuevo Objetivo Estratégico</h1>
+    <p class="text-muted">Agrega un objetivo que soporte el plan estratégico TI.</p>
+</div>
+
+<form asp-action="CreateObjetivo" method="post">
+    <div class="mb-3">
+        <label asp-for="Nombre" class="form-label">Nombre del objetivo</label>
+        <input asp-for="Nombre" class="form-control" />
+        <span asp-validation-for="Nombre" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Descripcion" class="form-label">Descripción</label>
+        <textarea asp-for="Descripcion" class="form-control" rows="3"></textarea>
+        <span asp-validation-for="Descripcion" class="text-danger"></span>
+    </div>
+    <div class="row g-3">
+        <div class="col-md-6">
+            <label asp-for="IndicadorKPI" class="form-label">Indicador KPI</label>
+            <input asp-for="IndicadorKPI" class="form-control" />
+        </div>
+        <div class="col-md-6">
+            <label asp-for="Meta" class="form-label">Meta</label>
+            <input asp-for="Meta" class="form-control" />
+        </div>
+    </div>
+    <div class="row g-3 mt-3">
+        <div class="col-md-6">
+            <label asp-for="Responsable" class="form-label">Responsable</label>
+            <input asp-for="Responsable" class="form-control" />
+        </div>
+        <div class="col-md-6">
+            <label asp-for="PorcentajeAvance" class="form-label">Avance (%)</label>
+            <input asp-for="PorcentajeAvance" class="form-control" type="number" min="0" max="100" />
+        </div>
+    </div>
+    <button type="submit" class="btn btn-success mt-4">
+        <i class="fas fa-save me-2"></i> Guardar objetivo
+    </button>
+    <a asp-action="Estrategia" class="btn btn-secondary ms-2 mt-4">Cancelar</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

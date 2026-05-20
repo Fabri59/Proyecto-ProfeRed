@@ -1,0 +1,35 @@
+@model Proyecto_Red.Models.CadenaValor
+
+@{
+    ViewData["Title"] = "Nueva Cadena de Valor";
+}
+
+<div class="mb-4">
+    <h1 class="display-6 fw-bold">Nueva Cadena de Valor</h1>
+    <p class="text-muted">Define las actividades estratégicas de la cadena de valor TI.</p>
+</div>
+
+<form asp-action="CreateCadenaValor" method="post">
+    <div class="mb-3">
+        <label asp-for="Operaciones" class="form-label">Operaciones</label>
+        <textarea asp-for="Operaciones" class="form-control" rows="2"></textarea>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Marketing" class="form-label">Marketing</label>
+        <textarea asp-for="Marketing" class="form-control" rows="2"></textarea>
+    </div>
+    <div class="mb-3">
+        <label asp-for="DesarrolloTecnologico" class="form-label">Desarrollo tecnológico</label>
+        <textarea asp-for="DesarrolloTecnologico" class="form-control" rows="2"></textarea>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Infraestructura" class="form-label">Infraestructura</label>
+        <textarea asp-for="Infraestructura" class="form-control" rows="2"></textarea>
+    </div>
+    <button type="submit" class="btn btn-success"><i class="fas fa-save me-2"></i> Guardar cadena</button>
+    <a asp-action="Analisis" class="btn btn-secondary ms-2">Cancelar</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

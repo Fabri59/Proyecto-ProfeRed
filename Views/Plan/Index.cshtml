@@ -1,0 +1,78 @@
+@model Proyecto_Red.ViewModels.PlanOverviewViewModel
+
+@{
+    ViewData["Title"] = "Plan Estratégico TI";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h1 class="display-6 fw-bold">Plan Estratégico TI</h1>
+        <p class="text-muted">Accede a todas las secciones del plan estratégico directamente desde el sistema.</p>
+    </div>
+    <a asp-action="Resumen" class="btn btn-outline-primary btn-lg">
+        <i class="fas fa-file-alt me-2"></i> Ver Resumen Ejecutivo
+    </a>
+</div>
+
+<div class="row g-4">
+    <div class="col-md-6 col-xl-4">
+        <div class="card bg-primary text-white p-4">
+            <h5 class="card-title"><i class="fas fa-book-open"></i> Presentación</h5>
+            <p class="card-text opacity-85">Define la introducción, alcance y la importancia del plan.</p>
+            <span class="badge bg-light text-primary mb-3">@Model.PresentacionCount registros</span>
+            <div>
+                <a asp-action="Presentacion" class="btn btn-light btn-sm">Abrir sección</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-xl-4">
+        <div class="card bg-success text-white p-4">
+            <h5 class="card-title"><i class="fas fa-bullseye"></i> Estrategia</h5>
+            <p class="card-text opacity-85">Misión, visión, valores, objetivos estratégicos y unidades de negocio.</p>
+            <span class="badge bg-light text-success mb-3">@Model.ObjetivosCount objetivos</span>
+            <div>
+                <a asp-action="Estrategia" class="btn btn-light btn-sm">Abrir sección</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-xl-4">
+        <div class="card bg-warning text-dark p-4">
+            <h5 class="card-title"><i class="fas fa-search"></i> Análisis</h5>
+            <p class="card-text opacity-85">Análisis interno / externo, PEST, Porter, BCG, CAME y cadena de valor.</p>
+            <span class="badge bg-light text-warning mb-3">@Model.AnalisisInternoCount + @Model.AnalisisExternoCount registros</span>
+            <div>
+                <a asp-action="Analisis" class="btn btn-light btn-sm">Abrir sección</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-xl-4">
+        <div class="card bg-info text-white p-4">
+            <h5 class="card-title"><i class="fas fa-sitemap"></i> Cadena de valor</h5>
+            <p class="card-text opacity-85">Registra las actividades clave de la cadena de valor TI.</p>
+            <span class="badge bg-light text-info mb-3">@Model.CadenaValorCount registros</span>
+            <div>
+                <a asp-action="Analisis" class="btn btn-light btn-sm">Abrir análisis</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-xl-4">
+        <div class="card bg-secondary text-white p-4">
+            <h5 class="card-title"><i class="fas fa-chart-network"></i> Matrices estratégicas</h5>
+            <p class="card-text opacity-85">BCG, PEST, Porter y CAME para la toma de decisiones.</p>
+            <span class="badge bg-light text-secondary mb-3">@Model.BCGCount matrices</span>
+            <div>
+                <a asp-action="Analisis" class="btn btn-light btn-sm">Abrir análisis</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-xl-4">
+        <div class="card bg-dark text-white p-4">
+            <h5 class="card-title"><i class="fas fa-file-invoice-dollar"></i> Reporte final</h5>
+            <p class="card-text opacity-85">Visualiza el reporte consolidado del plan estratégico TI.</p>
+            <span class="badge bg-light text-dark mb-3">@Model.CAMECount estrategias</span>
+            <div>
+                <a asp-action="Resumen" class="btn btn-light btn-sm">Ver reporte</a>
+            </div>
+        </div>
+    </div>
+</div>

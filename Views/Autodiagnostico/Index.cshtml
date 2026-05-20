@@ -1,0 +1,128 @@
+@model IEnumerable<Proyecto_Red.Models.Pregunta>
+@{
+    ViewData["Title"] = "Autodiagnóstico del Sistema";
+    var respuestasExistentes = ViewBag.RespuestasExistentes as Dictionary<int, int>;
+}
+
+<div class="container-fluid px-4 py-5">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="card-title">@ViewData["Title"]</h1>
+                </div>
+                <div class="card-body">
+                    <p class="mb-4">
+                        A continuación marque con una X para valorar su empresa en función de cada una de las afirmaciones, de tal forma que:<br>
+                        0 = En total en desacuerdo<br>
+                        1 = No está de acuerdo<br>
+                        2 = Está de acuerdo<br>
+                        3 = Está bastante de acuerdo<br>
+                        4 = En total acuerdo.
+                    </p>
+                    <p class="text-danger">En caso de no cumplimentar una casilla o duplicar su respuesta deberá aparecer un mensaje de error.</p>
+
+                    <form id="autodiagnosticoForm">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover" id="autodiagnosticoTable">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Código</th>
+                                        <th>Afirmación</th>
+                                        <th class="text-center">0</th>
+                                        <th class="text-center">1</th>
+                                        <th class="text-center">2</th>
+                                        <th class="text-center">3</th>
+                                        <th class="text-center">4</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var pregunta in Model)
+                                    {
+                                        <tr>
+                                            <td>@pregunta.IdPregunta</td>
+                                            <td>@pregunta.PreguntaTexto</td>
+                                            @for (int i = 0; i <= 4; i++)
+                                            {
+                                                <td class="text-center">
+                                                    <input type="radio" name="respuesta_@pregunta.IdPregunta" value="@i"
+                                                           @(respuestasExistentes != null && respuestasExistentes.ContainsKey(pregunta.IdPregunta) && respuestasExistentes[pregunta.IdPregunta] == i ? "checked" : "") />
+                                                </td>
+                                            }
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="mt-4">
+                            <button type="button" class="btn btn-primary" id="guardarBtn">Guardar Respuestas</button>
+                            <a href="@Url.Action("Resultados", "Autodiagnostico")" class="btn btn-secondary">Ver Resultados</a>
+                        </div>
+                    </form>
+
+                    <div id="resultados" class="mt-4" style="display: none;">
+                        <h3>Resultados</h3>
+                        <p>Puntaje Total: <span id="puntajeTotal"></span></p>
+                        <p>Promedio: <span id="promedio"></span></p>
+                        <p>Nivel: <span id="nivel"></span></p>
+                    </div>
+
+                    <div id="errores" class="mt-4 alert alert-danger" style="display: none;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#guardarBtn').click(function () {
+                var respuestas = {};
+                var errores = [];
+                var filasCompletas = 0;
+
+                $('#autodiagnosticoTable tbody tr').each(function () {
+                    var idPregunta = $(this).find('td:first').text();
+                    var seleccionados = $(this).find('input[type="radio"]:checked');
+
+                    if (seleccionados.length === 0) {
+                        errores.push('La pregunta ' + idPregunta + ' no tiene respuesta.');
+                    } else if (seleccionados.length > 1) {
+                        errores.push('La pregunta ' + idPregunta + ' tiene múltiples respuestas.');
+                    } else {
+                        respuestas[idPregunta] = parseInt(seleccionados.val());
+                        filasCompletas++;
+                    }
+                });
+
+                if (errores.length > 0) {
+                    $('#errores').html(errores.join('<br>')).show();
+                    $('#resultados').hide();
+                } else {
+                    $('#errores').hide();
+                    $.ajax({
+                        url: '@Url.Action("GuardarRespuestas", "Autodiagnostico")',
+                        type: 'POST',
+                        data: { respuestas: respuestas },
+                        success: function (response) {
+                            if (response.success) {
+                                $('#puntajeTotal').text(response.puntajeTotal);
+                                $('#promedio').text(response.promedio.toFixed(2));
+                                $('#nivel').text(response.nivel);
+                                $('#resultados').show();
+                                alert('Respuestas guardadas correctamente.');
+                            } else {
+                                $('#errores').text(response.message).show();
+                            }
+                        },
+                        error: function () {
+                            $('#errores').text('Error al guardar las respuestas.').show();
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}

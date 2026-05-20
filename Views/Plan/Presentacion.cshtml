@@ -1,0 +1,44 @@
+@model IEnumerable<Proyecto_Red.Models.PresentacionPlan>
+
+@{
+    ViewData["Title"] = "Presentación";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h1 class="display-6 fw-bold">Presentación del Plan</h1>
+        <p class="text-muted">Registra la introducción, alcance y finalidad del plan estratégico.</p>
+    </div>
+    <a asp-action="CreatePresentacion" class="btn btn-primary btn-lg">
+        <i class="fas fa-plus"></i> Nueva presentación
+    </a>
+</div>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">
+        No hay elementos registrados todavía. Crea la primera presentación de plan estratégico.</div>
+}
+else
+{
+    <div class="row gy-4">
+        @foreach (var item in Model)
+        {
+            <div class="col-12">
+                <div class="card p-4">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div>
+                            <h5 class="mb-1">Presentación #@item.Id</h5>
+                            <span class="badge bg-secondary">Información general</span>
+                        </div>
+                    </div>
+                    <p><strong>Introducción:</strong> @item.Introduccion</p>
+                    <p><strong>Descripción del plan:</strong> @item.DescripcionPlan</p>
+                    <p><strong>Finalidad:</strong> @item.Finalidad</p>
+                    <p><strong>Alcance:</strong> @item.Alcance</p>
+                    <p><strong>Importancia:</strong> @item.Importancia</p>
+                </div>
+            </div>
+        }
+    </div>
+}

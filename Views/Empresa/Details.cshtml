@@ -1,0 +1,22 @@
+@model Proyecto_Red.Models.Empresa
+
+@{
+    ViewData["Title"] = "Detalle Empresa";
+}
+
+<h1>Detalle de Empresa</h1>
+<div class="card">
+    <div class="card-body">
+        <h4>@Model.Nombre</h4>
+        <p><strong>RUC:</strong> @Model.RUC</p>
+        <p><strong>Razón Social:</strong> @Model.RazonSocial</p>
+        <p><strong>Sector:</strong> @Model.Sector</p>
+        <p><strong>Representante:</strong> @Model.Representante</p>
+        <p><strong>Período estratégico:</strong> @Model.PeriodoEstrategico</p>
+        <p><strong>Inicio:</strong> @Model.FechaInicio?.ToString("yyyy-MM-dd")</p>
+        <p><strong>Fin:</strong> @Model.FechaFin?.ToString("yyyy-MM-dd")</p>
+        <p><strong>Correo:</strong> @Model.Correo</p>
+        <p><strong>Teléfono:</strong> @Model.Telefono</p>
+    </div>
+</div>
+<a asp-action="Index" class="btn btn-secondary mt-3">Volver</a>

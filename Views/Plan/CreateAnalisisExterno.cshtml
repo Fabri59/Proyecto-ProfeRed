@@ -1,0 +1,35 @@
+@model Proyecto_Red.Models.AnalisisExterno
+
+@{
+    ViewData["Title"] = "Nuevo Análisis Externo";
+}
+
+<div class="mb-4">
+    <h1 class="display-6 fw-bold">Nuevo Análisis Externo</h1>
+    <p class="text-muted">Registra oportunidades, amenazas y tendencias externas.</p>
+</div>
+
+<form asp-action="CreateAnalisisExterno" method="post">
+    <div class="mb-3">
+        <label asp-for="Oportunidades" class="form-label">Oportunidades</label>
+        <textarea asp-for="Oportunidades" class="form-control" rows="3"></textarea>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Amenazas" class="form-label">Amenazas</label>
+        <textarea asp-for="Amenazas" class="form-control" rows="3"></textarea>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Competencia" class="form-label">Competencia</label>
+        <textarea asp-for="Competencia" class="form-control" rows="2"></textarea>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Mercado" class="form-label">Mercado</label>
+        <textarea asp-for="Mercado" class="form-control" rows="2"></textarea>
+    </div>
+    <button type="submit" class="btn btn-success"><i class="fas fa-save me-2"></i> Guardar análisis</button>
+    <a asp-action="Analisis" class="btn btn-secondary ms-2">Cancelar</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

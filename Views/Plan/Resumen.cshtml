@@ -1,0 +1,131 @@
+@model Proyecto_Red.ViewModels.PlanResumenViewModel
+
+@{
+    ViewData["Title"] = "Resumen Ejecutivo";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h1 class="display-6 fw-bold">Resumen Ejecutivo</h1>
+        <p class="text-muted">Visión consolidada del plan estratégico de TI basada en los datos registrados.</p>
+    </div>
+    <a asp-action="Index" class="btn btn-outline-secondary btn-lg">
+        <i class="fas fa-arrow-left me-2"></i> Volver al plan
+    </a>
+</div>
+
+<div class="row gy-4">
+    <div class="col-lg-6">
+        <div class="card p-4 mb-4">
+            <h5 class="mb-3">Presentación</h5>
+            @if (Model.Presentacion is null)
+            {
+                <p class="text-muted">Agrega una presentación para generar el resumen ejecutivo.</p>
+            }
+            else
+            {
+                <p><strong>Introducción:</strong> @Model.Presentacion.Introduccion</p>
+                <p><strong>Finalidad:</strong> @Model.Presentacion.Finalidad</p>
+                <p><strong>Alcance:</strong> @Model.Presentacion.Alcance</p>
+                <p><strong>Importancia:</strong> @Model.Presentacion.Importancia</p>
+            }
+        </div>
+        <div class="card p-4 mb-4">
+            <h5 class="mb-3">Misión y Visión</h5>
+            @if (Model.Mision is null && Model.Vision is null)
+            {
+                <p class="text-muted">Registra misión y visión para completar esta sección.</p>
+            }
+            else
+            {
+                @if (Model.Mision is not null)
+                {
+                    <p><strong>Misión:</strong> @Model.Mision.Descripcion</p>
+                }
+                @if (Model.Vision is not null)
+                {
+                    <p><strong>Visión:</strong> @Model.Vision.Descripcion</p>
+                }
+            }
+        </div>
+        <div class="card p-4 mb-4">
+            <h5 class="mb-3">Valores</h5>
+            @if (!Model.Valores.Any())
+            {
+                <p class="text-muted">No hay valores registrados.</p>
+            }
+            else
+            {
+                <ul class="list-group">
+                    @foreach (var item in Model.Valores)
+                    {
+                        <li class="list-group-item">
+                            <strong>@item.Nombre:</strong> @item.Descripcion
+                        </li>
+                    }
+                </ul>
+            }
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="card p-4 mb-4">
+            <h5 class="mb-3">Objetivos Estratégicos y UEN</h5>
+            @if (!Model.Objetivos.Any() && !Model.UENes.Any())
+            {
+                <p class="text-muted">Agrega objetivos y UEN para completar esta parte del resumen.</p>
+            }
+            else
+            {
+                @if (Model.Objetivos.Any())
+                {
+                    <p><strong>Objetivos:</strong></p>
+                    <ul class="list-group mb-3">
+                        @foreach (var item in Model.Objetivos)
+                        {
+                            <li class="list-group-item">
+                                <strong>@item.Nombre:</strong> @item.Descripcion
+                            </li>
+                        }
+                    </ul>
+                }
+                @if (Model.UENes.Any())
+                {
+                    <p><strong>UEN:</strong></p>
+                    <ul class="list-group">
+                        @foreach (var item in Model.UENes)
+                        {
+                            <li class="list-group-item">
+                                <strong>@item.Nombre:</strong> @item.Descripcion
+                            </li>
+                        }
+                    </ul>
+                }
+            }
+        </div>
+        <div class="card p-4 mb-4">
+            <h5 class="mb-3">Análisis</h5>
+            @if (Model.AnalisisInterno is null && Model.AnalisisExterno is null)
+            {
+                <p class="text-muted">Agrega los análisis interno y externo para completar esta sección.</p>
+            }
+            else
+            {
+                @if (Model.AnalisisInterno is not null)
+                {
+                    <p><strong>Interno:</strong> Fortalezas / Debilidades principales.</p>
+                }
+                @if (Model.AnalisisExterno is not null)
+                {
+                    <p><strong>Externo:</strong> Oportunidades / Amenazas principales.</p>
+                }
+            }
+        </div>
+        <div class="card p-4 mb-4">
+            <h5 class="mb-3">Matrices</h5>
+            <p class="mb-1"><strong>BCG:</strong> @Model.MatricesBCG.Count() elementos registrados.</p>
+            <p class="mb-1"><strong>Porter:</strong> @(Model.AnalisisPorter is not null ? "Registrado" : "No registrado").</p>
+            <p class="mb-1"><strong>PEST:</strong> @(Model.AnalisisPEST is not null ? "Registrado" : "No registrado").</p>
+            <p class="mb-1"><strong>CAME:</strong> @(Model.MatrizCAME is not null ? "Registrado" : "No registrado").</p>
+        </div>
+    </div>
+</div>

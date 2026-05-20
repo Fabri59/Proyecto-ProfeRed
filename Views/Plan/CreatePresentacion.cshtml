@@ -1,0 +1,48 @@
+@model Proyecto_Red.Models.PresentacionPlan
+
+@{
+    ViewData["Title"] = "Nueva Presentación";
+}
+
+<div class="mb-4">
+    <h1 class="display-6 fw-bold">Nueva Presentación del Plan</h1>
+    <p class="text-muted">Describe la introducción, finalidad y alcance del plan estratégico TI.</p>
+</div>
+
+<form asp-action="CreatePresentacion" method="post">
+    <div class="mb-3">
+        <label asp-for="Introduccion" class="form-label">Introducción</label>
+        <textarea asp-for="Introduccion" class="form-control" rows="3"></textarea>
+        <span asp-validation-for="Introduccion" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="DescripcionPlan" class="form-label">Descripción del plan</label>
+        <textarea asp-for="DescripcionPlan" class="form-control" rows="3"></textarea>
+        <span asp-validation-for="DescripcionPlan" class="text-danger"></span>
+    </div>
+    <div class="row g-3">
+        <div class="col-md-6">
+            <label asp-for="Finalidad" class="form-label">Finalidad</label>
+            <textarea asp-for="Finalidad" class="form-control" rows="2"></textarea>
+            <span asp-validation-for="Finalidad" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="Alcance" class="form-label">Alcance</label>
+            <textarea asp-for="Alcance" class="form-control" rows="2"></textarea>
+            <span asp-validation-for="Alcance" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="mb-3 mt-3">
+        <label asp-for="Importancia" class="form-label">Importancia</label>
+        <textarea asp-for="Importancia" class="form-control" rows="2"></textarea>
+        <span asp-validation-for="Importancia" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-success">
+        <i class="fas fa-save me-2"></i> Guardar presentación
+    </button>
+    <a asp-action="Presentacion" class="btn btn-secondary ms-2">Cancelar</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

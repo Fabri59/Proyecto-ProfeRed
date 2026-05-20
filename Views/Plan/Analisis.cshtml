@@ -1,0 +1,161 @@
+@model Proyecto_Red.ViewModels.PlanAnalisisViewModel
+
+@{
+    ViewData["Title"] = "Análisis Estratégico";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h1 class="display-6 fw-bold">Análisis Estratégico</h1>
+        <p class="text-muted">Registra y revisa los análisis que fundamentan el plan de TI.</p>
+    </div>
+    <div class="btn-group">
+        <a asp-action="CreateAnalisisInterno" class="btn btn-outline-primary">Interno</a>
+        <a asp-action="CreateAnalisisExterno" class="btn btn-outline-primary">Externo</a>
+        <a asp-action="CreateAnalisisPEST" class="btn btn-outline-primary">PEST</a>
+        <a asp-action="CreateAnalisisPorter" class="btn btn-outline-primary">Porter</a>
+        <a asp-action="CreateCadenaValor" class="btn btn-outline-primary">Cadena valor</a>
+        <a asp-action="CreateMatrizBCG" class="btn btn-outline-primary">BCG</a>
+        <a asp-action="CreateCAME" class="btn btn-outline-primary">CAME</a>
+    </div>
+</div>
+
+<div class="row gy-4">
+    <div class="col-lg-6">
+        <div class="card p-4 mb-4">
+            <h5 class="mb-3">Análisis Interno</h5>
+            @if (!Model.AnalisisInternos.Any())
+            {
+                <p class="text-muted">No hay análisis interno registrado.</p>
+            }
+            else
+            {
+                @foreach (var item in Model.AnalisisInternos)
+                {
+                    <div class="mb-3">
+                        <p><strong>Fortalezas:</strong> @item.Fortalezas</p>
+                        <p><strong>Debilidades:</strong> @item.Debilidades</p>
+                        <small class="text-muted">Recursos tecnológicos: @item.RecursosTecnologicos</small>
+                    </div>
+                }
+            }
+        </div>
+
+        <div class="card p-4 mb-4">
+            <h5 class="mb-3">Análisis Externo</h5>
+            @if (!Model.AnalisisExternos.Any())
+            {
+                <p class="text-muted">No hay análisis externo registrado.</p>
+            }
+            else
+            {
+                @foreach (var item in Model.AnalisisExternos)
+                {
+                    <div class="mb-3">
+                        <p><strong>Oportunidades:</strong> @item.Oportunidades</p>
+                        <p><strong>Amenazas:</strong> @item.Amenazas</p>
+                        <small class="text-muted">Competencia: @item.Competencia • Mercado: @item.Mercado</small>
+                    </div>
+                }
+            }
+        </div>
+
+        <div class="card p-4 mb-4">
+            <h5 class="mb-3">Cadena de Valor</h5>
+            @if (!Model.CadenasValor.Any())
+            {
+                <p class="text-muted">No hay cadena de valor registrada.</p>
+            }
+            else
+            {
+                @foreach (var item in Model.CadenasValor)
+                {
+                    <div class="mb-3">
+                        <p><strong>Operaciones:</strong> @item.Operaciones</p>
+                        <p><strong>Marketing:</strong> @item.Marketing</p>
+                        <p><strong>Desarrollo tecnológico:</strong> @item.DesarrolloTecnologico</p>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="card p-4 mb-4">
+            <h5 class="mb-3">Matriz BCG</h5>
+            @if (!Model.MatricesBCG.Any())
+            {
+                <p class="text-muted">No hay elementos BCG registrados.</p>
+            }
+            else
+            {
+                <ul class="list-group">
+                    @foreach (var item in Model.MatricesBCG)
+                    {
+                        <li class="list-group-item">
+                            <strong>@item.ProductoProceso</strong> • Participación: @item.ParticipacionMercado% • Crecimiento: @item.CrecimientoMercado% • <span class="badge bg-info">@item.Clasificacion</span>
+                        </li>
+                    }
+                </ul>
+            }
+        </div>
+
+        <div class="card p-4 mb-4">
+            <h5 class="mb-3">Análisis Porter</h5>
+            @if (!Model.AnalisisPorters.Any())
+            {
+                <p class="text-muted">No hay análisis Porter registrado.</p>
+            }
+            else
+            {
+                @foreach (var item in Model.AnalisisPorters)
+                {
+                    <div class="mb-3">
+                        <p><strong>Rivalidad:</strong> @item.RivalidadCompetencia</p>
+                        <p><strong>Amenaza nuevos competidores:</strong> @item.AmenazaNuevosCompetidores</p>
+                        <p><strong>Poder clientes:</strong> @item.PoderClientes</p>
+                    </div>
+                }
+            }
+        </div>
+
+        <div class="card p-4 mb-4">
+            <h5 class="mb-3">Análisis PEST</h5>
+            @if (!Model.AnalisisPESTs.Any())
+            {
+                <p class="text-muted">No hay análisis PEST registrado.</p>
+            }
+            else
+            {
+                @foreach (var item in Model.AnalisisPESTs)
+                {
+                    <div class="mb-3">
+                        <p><strong>Político:</strong> @item.Politicos</p>
+                        <p><strong>Económico:</strong> @item.Economicos</p>
+                        <p><strong>Tecnológico:</strong> @item.Tecnologicos</p>
+                    </div>
+                }
+            }
+        </div>
+
+        <div class="card p-4">
+            <h5 class="mb-3">Matriz CAME</h5>
+            @if (!Model.MatricesCAME.Any())
+            {
+                <p class="text-muted">No hay matriz CAME registrada.</p>
+            }
+            else
+            {
+                @foreach (var item in Model.MatricesCAME)
+                {
+                    <div class="mb-3">
+                        <p><strong>Corregir:</strong> @item.Corregir</p>
+                        <p><strong>Afrontar:</strong> @item.Afrontar</p>
+                        <p><strong>Mantener:</strong> @item.Mantener</p>
+                        <p><strong>Explotar:</strong> @item.Explotar</p>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>

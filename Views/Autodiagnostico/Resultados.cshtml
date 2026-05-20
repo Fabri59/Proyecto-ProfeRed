@@ -1,0 +1,49 @@
+@model Proyecto_Red.Models.Resultado
+@{
+    ViewData["Title"] = "Resultados del Autodiagnóstico";
+}
+
+<div class="container-fluid px-4 py-5">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="card-title">@ViewData["Title"]</h1>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card text-white bg-primary mb-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">Puntaje Total</h5>
+                                    <h2>@Model.PuntajeTotal</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card text-white bg-success mb-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">Promedio</h5>
+                                    <h2>@Model.Promedio.ToString("F2")</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card text-white @(Model.Nivel == "Alto" ? "bg-success" : Model.Nivel == "Medio" ? "bg-warning" : "bg-danger") mb-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">Nivel</h5>
+                                    <h2>@Model.Nivel</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-4">
+                        <a href="@Url.Action("Index", "Autodiagnostico")" class="btn btn-primary">Editar Respuestas</a>
+                        <button class="btn btn-secondary" onclick="window.print()">Imprimir</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

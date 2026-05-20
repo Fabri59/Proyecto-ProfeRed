@@ -1,0 +1,8 @@
+bin/
+obj/
+*.db
+*.sqlite
+*.user
+*.vs/
+.vscode/
+.DS_Store

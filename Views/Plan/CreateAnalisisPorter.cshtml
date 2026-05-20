@@ -1,0 +1,39 @@
+@model Proyecto_Red.Models.AnalisisPorter
+
+@{
+    ViewData["Title"] = "Nuevo Análisis Porter";
+}
+
+<div class="mb-4">
+    <h1 class="display-6 fw-bold">Nuevo Análisis Porter</h1>
+    <p class="text-muted">Registra las cinco fuerzas que afectan la estrategia TI.</p>
+</div>
+
+<form asp-action="CreateAnalisisPorter" method="post">
+    <div class="mb-3">
+        <label asp-for="RivalidadCompetencia" class="form-label">Rivalidad de la competencia</label>
+        <textarea asp-for="RivalidadCompetencia" class="form-control" rows="2"></textarea>
+    </div>
+    <div class="mb-3">
+        <label asp-for="AmenazaNuevosCompetidores" class="form-label">Amenaza de nuevos competidores</label>
+        <textarea asp-for="AmenazaNuevosCompetidores" class="form-control" rows="2"></textarea>
+    </div>
+    <div class="mb-3">
+        <label asp-for="AmenazaSustitutos" class="form-label">Amenaza de sustitutos</label>
+        <textarea asp-for="AmenazaSustitutos" class="form-control" rows="2"></textarea>
+    </div>
+    <div class="mb-3">
+        <label asp-for="PoderClientes" class="form-label">Poder de los clientes</label>
+        <textarea asp-for="PoderClientes" class="form-control" rows="2"></textarea>
+    </div>
+    <div class="mb-3">
+        <label asp-for="PoderProveedores" class="form-label">Poder de los proveedores</label>
+        <textarea asp-for="PoderProveedores" class="form-control" rows="2"></textarea>
+    </div>
+    <button type="submit" class="btn btn-success"><i class="fas fa-save me-2"></i> Guardar análisis</button>
+    <a asp-action="Analisis" class="btn btn-secondary ms-2">Cancelar</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

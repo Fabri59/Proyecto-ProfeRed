@@ -1,0 +1,22 @@
+@model Proyecto_Red.Models.Empresa
+
+@{
+    ViewData["Title"] = "Eliminar Empresa";
+}
+
+<h1>Eliminar Empresa</h1>
+<div class="alert alert-danger">
+    ¿Está seguro de que desea eliminar esta empresa?
+</div>
+<div class="card mb-3">
+    <div class="card-body">
+        <h4>@Model.Nombre</h4>
+        <p><strong>RUC:</strong> @Model.RUC</p>
+        <p><strong>Sector:</strong> @Model.Sector</p>
+    </div>
+</div>
+<form asp-action="Delete">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>

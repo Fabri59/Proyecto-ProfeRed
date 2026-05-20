@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"] - Plan Estratégico TI</title>
+    <link href="~/lib/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/lib/fontawesome/all.min.css" />
+    <link rel="stylesheet" href="~/lib/datatables/css/dataTables.bootstrap5.min.css" />
+    <style>
+        :root {
+            --primary: #0d6efd;
+            --secondary: #6c757d;
+            --success: #198754;
+            --danger: #dc3545;
+            --warning: #ffc107;
+            --info: #0dcaf0;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        #wrapper {
+            min-height: 100vh;
+        }
+        #sidebar-wrapper {
+            background: linear-gradient(180deg, #2c3e50 0%, #34495e 100%);
+            color: #fff;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+        }
+        .sidebar-heading {
+            background: linear-gradient(90deg, #1a252f 0%, #2c3e50 100%);
+            color: #fff;
+            padding: 1.5rem !important;
+            font-weight: 700;
+            font-size: 1.3rem;
+            border: none !important;
+        }
+        .list-group-item {
+            background: transparent !important;
+            border: none !important;
+            color: #ecf0f1 !important;
+            padding: 1rem 1.5rem !important;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+        .list-group-item:hover {
+            background: rgba(255,255,255,0.1) !important;
+            border-left-color: var(--primary);
+            color: #fff !important;
+            padding-left: 1.8rem !important;
+        }
+        .list-group-item i {
+            margin-right: 0.7rem;
+        }
+        .navbar {
+            background: linear-gradient(90deg, #fff 0%, #f8f9fa 100%) !important;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-bottom: 2px solid var(--primary);
+        }
+        #page-content-wrapper {
+            overflow-y: auto;
+        }
+        .container-fluid {
+            max-width: 100%;
+        }
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .btn {
+            border-radius: 5px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .table {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .table thead th {
+            background: linear-gradient(90deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            font-weight: 600;
+            border: none;
+        }
+        .badge {
+            padding: 0.5rem 0.8rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="d-flex" id="wrapper">
+        <nav class="border-end" id="sidebar-wrapper" style="min-width: 280px;">
+            <div class="sidebar-heading">
+                <i class="fas fa-chart-line"></i> Plan Estratégico TI
+            </div>
+            <div class="list-group list-group-flush">
+                <a href="@Url.Action("Index", "Dashboard")" class="list-group-item list-group-item-action">
+                    <i class="fas fa-home"></i> Dashboard
+                </a>
+                <a href="@Url.Action("Index", "Empresa")" class="list-group-item list-group-item-action">
+                    <i class="fas fa-building"></i> Empresa
+                </a>
+                <a href="@Url.Action("Index", "Plan")" class="list-group-item list-group-item-action">
+                    <i class="fas fa-layer-group"></i> Plan Estratégico TI
+                </a>
+                <small class="ms-3 mt-2 d-block text-muted">Secciones</small>
+                <a href="@Url.Action("Presentacion", "Plan")" class="list-group-item list-group-item-action" style="padding-left: 2.5rem !important; opacity: 0.9;">
+                    <i class="fas fa-file-alt"></i> Presentación
+                </a>
+                <a href="@Url.Action("Estrategia", "Plan")" class="list-group-item list-group-item-action" style="padding-left: 2.5rem !important; opacity: 0.9;">
+                    <i class="fas fa-bullseye"></i> Estrategia
+                </a>
+                <a href="@Url.Action("Analisis", "Plan")" class="list-group-item list-group-item-action" style="padding-left: 2.5rem !important; opacity: 0.9;">
+                    <i class="fas fa-search"></i> Análisis
+                </a>
+                <a href="@Url.Action("Index", "Autodiagnostico")" class="list-group-item list-group-item-action" style="padding-left: 2.5rem !important; opacity: 0.9;">
+                    <i class="fas fa-clipboard-check"></i> Autodiagnóstico
+                </a>
+                <a href="@Url.Action("Resumen", "Plan")" class="list-group-item list-group-item-action" style="padding-left: 2.5rem !important; opacity: 0.9;">
+                    <i class="fas fa-file-invoice"></i> Resumen Ejecutivo
+                </a>
+            </div>
+        </nav>
+        <div id="page-content-wrapper" class="w-100">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="container-fluid">
+                    <button class="btn btn-outline-primary" id="sidebarToggle" style="border-radius: 5px;">
+                        <i class="fas fa-bars"></i> Menú
+                    </button>
+                    <span class="navbar-text ms-3 fw-bold text-secondary">
+                        <i class="fas fa-calendar-alt"></i> @DateTime.Now.ToString("dddd, d 'de' MMMM 'de' yyyy", new System.Globalization.CultureInfo("es-ES"))
+                    </span>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Logout", "Account")" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    <i class="fas fa-sign-out-alt"></i> Salir
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div class="container-fluid px-4 py-5">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    <form id="logout-form" asp-controller="Account" asp-action="Logout" method="post" class="d-none"></form>
+    <script src="~/lib/jquery/jquery-3.7.1.min.js"></script>
+    <script src="~/lib/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/chartjs/chart.umd.min.js"></script>
+    <script src="~/lib/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="~/lib/datatables/js/dataTables.bootstrap5.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#datatable').DataTable({
+                language: {
+                    url: '~/lib/datatables/i18n/es-ES.json'
+                }
+            });
+        });
+        document.getElementById('sidebarToggle')?.addEventListener('click', function () {
+            const sidebar = document.getElementById('sidebar-wrapper');
+            const isHidden = sidebar.style.display === 'none' || window.getComputedStyle(sidebar).display === 'none';
+            sidebar.style.display = isHidden ? 'block' : 'none';
+        });
+    </script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

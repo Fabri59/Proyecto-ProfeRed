@@ -1,0 +1,117 @@
+@model Proyecto_Red.Models.Empresa
+
+@{
+    ViewData["Title"] = "Crear Empresa";
+}
+
+<div class="mb-4">
+    <h1 class="display-5 fw-bold text-dark mb-2">
+        <i class="fas fa-plus-circle text-success"></i> Crear nueva empresa
+    </h1>
+    <p class="text-muted">Completa los datos para registrar una nueva empresa</p>
+</div>
+
+<div class="row">
+    <div class="col-lg-8">
+        <div class="card border-0">
+            <div class="card-body p-4">
+                <form asp-action="Create" method="post">
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <label asp-for="Nombre" class="form-label fw-bold"><i class="fas fa-briefcase"></i> Nombre</label>
+                            <input asp-for="Nombre" class="form-control form-control-lg" placeholder="Ej: Mi Empresa S.A.C." />
+                            <span asp-validation-for="Nombre" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="RazonSocial" class="form-label fw-bold"><i class="fas fa-file-contract"></i> Razón social</label>
+                            <input asp-for="RazonSocial" class="form-control form-control-lg" placeholder="Razón social legal" />
+                            <span asp-validation-for="RazonSocial" class="text-danger small"></span>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <label asp-for="RUC" class="form-label fw-bold"><i class="fas fa-id-card"></i> RUC</label>
+                            <input asp-for="RUC" class="form-control form-control-lg" placeholder="20123456789" />
+                            <span asp-validation-for="RUC" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="Sector" class="form-label fw-bold"><i class="fas fa-industry"></i> Sector</label>
+                            <input asp-for="Sector" class="form-control form-control-lg" placeholder="Ej: Tecnología, Manufactura" />
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label asp-for="DescripcionGeneral" class="form-label fw-bold"><i class="fas fa-align-left"></i> Descripción general</label>
+                        <textarea asp-for="DescripcionGeneral" class="form-control" rows="4" placeholder="Descripción de la empresa..."></textarea>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <label asp-for="Telefono" class="form-label fw-bold"><i class="fas fa-phone"></i> Teléfono</label>
+                            <input asp-for="Telefono" class="form-control form-control-lg" placeholder="+51 1 234 5678" />
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="Correo" class="form-label fw-bold"><i class="fas fa-envelope"></i> Correo</label>
+                            <input asp-for="Correo" class="form-control form-control-lg" placeholder="contacto@empresa.com" type="email" />
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label asp-for="PaginaWeb" class="form-label fw-bold"><i class="fas fa-globe"></i> Página web</label>
+                        <input asp-for="PaginaWeb" class="form-control form-control-lg" placeholder="https://www.empresa.com" />
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <label asp-for="Representante" class="form-label fw-bold"><i class="fas fa-user-tie"></i> Representante</label>
+                            <input asp-for="Representante" class="form-control form-control-lg" placeholder="Nombre del representante" />
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="PeriodoEstrategico" class="form-label fw-bold"><i class="fas fa-calendar-alt"></i> Período estratégico</label>
+                            <input asp-for="PeriodoEstrategico" class="form-control form-control-lg" placeholder="2024-2026" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label asp-for="FechaInicio" class="form-label fw-bold"><i class="fas fa-play-circle"></i> Fecha inicio</label>
+                            <input asp-for="FechaInicio" class="form-control form-control-lg" type="date" />
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="FechaFin" class="form-label fw-bold"><i class="fas fa-stop-circle"></i> Fecha fin</label>
+                            <input asp-for="FechaFin" class="form-control form-control-lg" type="date" />
+                        </div>
+                    </div>
+
+                    <div class="mt-4 d-flex gap-2">
+                        <button type="submit" class="btn btn-success btn-lg">
+                            <i class="fas fa-save"></i> Guardar empresa
+                        </button>
+                        <a asp-action="Index" class="btn btn-secondary btn-lg">
+                            <i class="fas fa-arrow-left"></i> Cancelar
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <div class="card border-0 bg-light">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-lightbulb text-warning"></i> Ayuda</h5>
+                <p class="small mb-2"><strong>¿Qué es una empresa?</strong></p>
+                <p class="small text-muted mb-3">La empresa es la unidad base para registrar tu plan estratégico de TI.</p>
+                <div class="alert alert-info small" role="alert">
+                    <strong>Campos requeridos:</strong> Nombre, Razón social y RUC
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+

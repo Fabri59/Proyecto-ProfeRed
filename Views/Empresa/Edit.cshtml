@@ -1,0 +1,72 @@
+@model Proyecto_Red.Models.Empresa
+
+@{
+    ViewData["Title"] = "Editar Empresa";
+}
+
+<h1>Editar Empresa</h1>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id" />
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label asp-for="Nombre" class="form-label"></label>
+            <input asp-for="Nombre" class="form-control" />
+            <span asp-validation-for="Nombre" class="text-danger"></span>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label asp-for="RazonSocial" class="form-label"></label>
+            <input asp-for="RazonSocial" class="form-control" />
+            <span asp-validation-for="RazonSocial" class="text-danger"></span>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label asp-for="RUC" class="form-label"></label>
+            <input asp-for="RUC" class="form-control" />
+            <span asp-validation-for="RUC" class="text-danger"></span>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label asp-for="Sector" class="form-label"></label>
+            <input asp-for="Sector" class="form-control" />
+        </div>
+        <div class="col-md-12 mb-3">
+            <label asp-for="DescripcionGeneral" class="form-label"></label>
+            <textarea asp-for="DescripcionGeneral" class="form-control" rows="4"></textarea>
+        </div>
+        <div class="col-md-4 mb-3">
+            <label asp-for="Telefono" class="form-label"></label>
+            <input asp-for="Telefono" class="form-control" />
+        </div>
+        <div class="col-md-4 mb-3">
+            <label asp-for="Correo" class="form-label"></label>
+            <input asp-for="Correo" class="form-control" />
+        </div>
+        <div class="col-md-4 mb-3">
+            <label asp-for="PaginaWeb" class="form-label"></label>
+            <input asp-for="PaginaWeb" class="form-control" />
+        </div>
+        <div class="col-md-6 mb-3">
+            <label asp-for="Representante" class="form-label"></label>
+            <input asp-for="Representante" class="form-control" />
+        </div>
+        <div class="col-md-6 mb-3">
+            <label asp-for="PeriodoEstrategico" class="form-label"></label>
+            <input asp-for="PeriodoEstrategico" class="form-control" />
+        </div>
+        <div class="col-md-4 mb-3">
+            <label asp-for="FechaInicio" class="form-label"></label>
+            <input asp-for="FechaInicio" class="form-control" type="date" />
+        </div>
+        <div class="col-md-4 mb-3">
+            <label asp-for="FechaFin" class="form-label"></label>
+            <input asp-for="FechaFin" class="form-control" type="date" />
+        </div>
+        <div class="col-md-12">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
