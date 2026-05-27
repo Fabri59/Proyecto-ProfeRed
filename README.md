@@ -1,6 +1,84 @@
-# Sistema Web PETI Empresarial
+# Sistema PETI Empresarial
 
-Prototipo web basado en el archivo `Formato para Elaborar un Plan estratégico de TI.xlsx`.
+Aplicación web empresarial para crear, gestionar y dar seguimiento a Planes Estratégicos de TI (PETI).  
+Ahora incluye frontend, backend, autenticación real y persistencia en SQLite.
+
+## Stack
+
+- Frontend: HTML, CSS y JavaScript.
+- Backend: Node.js + Express.
+- Base de datos: SQLite.
+- Autenticación: token firmado en backend.
+
+## Estructura
+
+```text
+frontend/
+  index.html
+  styles.css
+  app.js
+  api.js
+  assets/
+
+backend/
+  server.js
+  routes/
+  controllers/
+  middleware/
+  database/
+
+package.json
+.env.example
+.gitignore
+README.md
+```
+
+## Instalación local
+
+```bash
+git clone https://github.com/Fabri59/Proyecto-ProfeRed.git
+cd Proyecto-ProfeRed
+npm install
+cp .env.example .env
+npm run dev
+```
+
+Abrir:
+
+```text
+http://localhost:3000
+```
+
+Demo inicial creada automáticamente:
+
+```text
+Correo: owner@nova.pe
+Contraseña: demo123
+```
+
+## Variables de entorno
+
+Crear `.env`:
+
+```env
+PORT=3000
+JWT_SECRET=pon-un-secreto-largo-y-unico
+DB_PATH=./data/peti.sqlite
+```
+
+## Ejecución
+
+Desarrollo:
+
+```bash
+npm run dev
+```
+
+Producción:
+
+```bash
+npm start
+```
 
 ## Alcance implementado
 
@@ -20,13 +98,6 @@ Prototipo web basado en el archivo `Formato para Elaborar un Plan estratégico d
 - Autoguardado, historial de cambios, usuario responsable, área, fecha y versionado básico.
 - Exportación JSON del PETI.
 
-## Cómo abrirlo
-
-Abra este archivo en el navegador:
-
-`C:\Users\Hashira\Documents\Codex\2026-05-26\files-mentioned-by-the-user-formato\index.html`
-
-No requiere instalar dependencias.
 
 ## Roles incluidos
 
