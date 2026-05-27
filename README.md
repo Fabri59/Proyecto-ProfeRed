@@ -20,13 +20,6 @@ Prototipo web basado en el archivo `Formato para Elaborar un Plan estratégico d
 - Autoguardado, historial de cambios, usuario responsable, área, fecha y versionado básico.
 - Exportación JSON del PETI.
 
-## Cómo abrirlo
-
-Abra este archivo en el navegador:
-
-`C:\Users\Hashira\Documents\Codex\2026-05-26\files-mentioned-by-the-user-formato\index.html`
-
-No requiere instalar dependencias.
 
 ## Roles incluidos
 
