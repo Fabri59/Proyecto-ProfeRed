@@ -74,15 +74,10 @@ Correo: owner@nova.pe
 Contraseña: demo123
 ```
 
-## Variables de entorno
+## Enlace de sistema desplegado
 
-Crear `.env`:
+http://38.250.116.71:3001/
 
-```env
-PORT=3000
-JWT_SECRET=pon-un-secreto-largo-y-unico
-DB_PATH=./data/peti.sqlite
-```
 
 ## Ejecución
 
