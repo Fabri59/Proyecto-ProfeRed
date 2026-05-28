@@ -4,12 +4,16 @@ const sqlite3 = require("sqlite3").verbose();
 const { createPeti } = require("./defaultPeti");
 const { hashPassword } = require("../middleware/security");
 
-const dbDir = path.join(__dirname, "../../data");
-const dbPath = process.env.DB_PATH || path.join(dbDir, "peti.sqlite");
+const defaultDbDir = path.join(__dirname, "../../data");
+const configuredDbPath = process.env.DB_PATH || path.join(defaultDbDir, "peti.sqlite");
+const resolvedDbPath = path.isAbsolute(configuredDbPath)
+  ? configuredDbPath
+  : path.resolve(process.cwd(), configuredDbPath);
+const resolvedDbDir = path.dirname(resolvedDbPath);
 
-if (!fs.existsSync(dbDir)) fs.mkdirSync(dbDir, { recursive: true });
+if (!fs.existsSync(resolvedDbDir)) fs.mkdirSync(resolvedDbDir, { recursive: true });
 
-const db = new sqlite3.Database(dbPath);
+const db = new sqlite3.Database(resolvedDbPath);
 
 function run(sql, params = []) {
   return new Promise((resolve, reject) => {
@@ -64,8 +68,10 @@ async function initDb() {
 }
 
 async function seedDemo() {
-  const row = await get("SELECT COUNT(*) AS count FROM users");
-  if (row.count > 0) return;
+  const orgs = await get("SELECT COUNT(*) AS count FROM organizations");
+  const users = await get("SELECT COUNT(*) AS count FROM users");
+  const petis = await get("SELECT COUNT(*) AS count FROM petis");
+  if (orgs.count > 0 || users.count > 0 || petis.count > 0) return;
 
   const orgId = "org-demo-nova";
   const peti = createPeti("Nova Retail S.A.C.", "20600000001", "Comercio minorista omnicanal");

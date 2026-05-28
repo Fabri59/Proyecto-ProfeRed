@@ -857,8 +857,9 @@ function openUserPermissions(userId) {
 function seedBcgData() {
   peti().data.bcg.products = [
     { id: uid("prod"), name: "E-commerce", sales: 580000, growth: 22, competitorSales: 420000, owner: "TI" },
+    { id: uid("prod"), name: "Marketplace", sales: 260000, growth: 18, competitorSales: 520000, owner: "Comercial" },
     { id: uid("prod"), name: "Tiendas físicas", sales: 760000, growth: 4, competitorSales: 610000, owner: "Operaciones" },
-    { id: uid("prod"), name: "Marketplace", sales: 210000, growth: 28, competitorSales: 480000, owner: "Comercial" },
+    { id: uid("prod"), name: "Distribución regional", sales: 180000, growth: 3, competitorSales: 420000, owner: "Logística" },
   ];
   scheduleSave("bcg", "Simulación BCG");
 }
@@ -901,11 +902,11 @@ function drawBcg() {
   const w = canvas.width;
   const h = canvas.height;
   ctx.clearRect(0, 0, w, h);
-  [["#ecfeff", 70, 30], ["#fef3c7", w / 2 + 20, 30], ["#dcfce7", 70, h / 2 - 15], ["#fee2e2", w / 2 + 20, h / 2 - 15]].forEach(([c, x, y]) => { ctx.fillStyle = c; ctx.fillRect(x, y, (w - 100) / 2, (h - 90) / 2); });
+  [["#fef3c7", 70, 30], ["#ecfeff", w / 2 + 20, 30], ["#fee2e2", 70, h / 2 - 15], ["#dcfce7", w / 2 + 20, h / 2 - 15]].forEach(([c, x, y]) => { ctx.fillStyle = c; ctx.fillRect(x, y, (w - 100) / 2, (h - 90) / 2); });
   ctx.strokeStyle = "#334155"; ctx.strokeRect(70, 30, w - 100, h - 90);
   ctx.beginPath(); ctx.moveTo(w / 2 + 20, 30); ctx.lineTo(w / 2 + 20, h - 60); ctx.moveTo(70, h / 2 - 15); ctx.lineTo(w - 30, h / 2 - 15); ctx.stroke();
   ctx.fillStyle = "#0f172a"; ctx.font = "700 14px Segoe UI";
-  [["Estrella", 105, 58], ["Incógnita", w / 2 + 55, 58], ["Vaca", 105, h / 2 + 18], ["Perro", w / 2 + 55, h / 2 + 18]].forEach(([t, x, y]) => ctx.fillText(t, x, y));
+  [["Incógnita", 105, 58], ["Estrella", w / 2 + 55, 58], ["Perro", 105, h / 2 + 18], ["Vaca", w / 2 + 55, h / 2 + 18]].forEach(([t, x, y]) => ctx.fillText(t, x, y));
   const products = peti().data.bcg.products;
   const maxSales = Math.max(1, ...products.map((p) => Number(p.sales || 0)));
   products.forEach((p, i) => {

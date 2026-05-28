@@ -1,0 +1,231 @@
+========================================
+        DATOS GENERALES DE LA EMPRESA
+========================================
+
+Nombre de la empresa:
+InnovaTech Perú
+
+Nombre legal o comercial:
+InnovaTech Perú S.A.C.
+
+RUC:
+20698765432
+
+Correo empresarial:
+admin@innovatechperu.com
+
+Responsable gerencial:
+María Fernanda Quispe López
+
+Responsable TI:
+Luis Alberto Ramos Torres
+
+Sector:
+Tecnología y Desarrollo de Software
+
+Colaboradores:
+40
+
+Descripción:
+InnovaTech Perú S.A.C. es una empresa dedicada al desarrollo de soluciones tecnológicas para empresas e instituciones. Ofrece servicios de desarrollo web y móvil, soporte técnico, implementación de sistemas empresariales, ciberseguridad y consultoría digital, buscando optimizar procesos y mejorar la productividad organizacional.
+
+========================================
+                MISIÓN
+========================================
+
+Brindar soluciones tecnológicas innovadoras y seguras que permitan a las organizaciones mejorar sus procesos, aumentar su productividad y adaptarse a la transformación digital mediante servicios de calidad y atención especializada.
+
+========================================
+                VISIÓN
+========================================
+
+Ser una empresa líder en innovación tecnológica a nivel nacional, reconocida por la excelencia de sus servicios digitales y por contribuir al crecimiento tecnológico de las organizaciones.
+
+========================================
+                VALORES
+========================================
+
+1. Innovación
+Promovemos nuevas ideas y tecnologías para ofrecer soluciones modernas y eficientes.
+
+2. Responsabilidad
+Cumplimos nuestros compromisos con ética y profesionalismo.
+
+3. Trabajo en equipo
+Fomentamos la colaboración y el respeto entre todos los integrantes de la empresa.
+
+4. Calidad
+Garantizamos altos estándares en cada proyecto y servicio desarrollado.
+
+5. Compromiso
+Priorizamos las necesidades y satisfacción de nuestros clientes.
+
+========================================
+        OBJETIVOS ESTRATÉGICOS
+========================================
+
+OBJETIVO 1
+
+Objetivo estratégico:
+Incrementar la cartera de clientes corporativos.
+
+Objetivo específico:
+Aumentar en un 30% la cantidad de clientes durante los próximos dos años.
+
+Indicador:
+Porcentaje de crecimiento de clientes registrados.
+
+Responsable:
+Gerencia Comercial.
+
+----------------------------------------
+
+OBJETIVO 2
+
+Objetivo estratégico:
+Implementar soluciones basadas en inteligencia artificial.
+
+Objetivo específico:
+Desarrollar herramientas de automatización y análisis inteligente para empresas.
+
+Indicador:
+Número de soluciones con IA implementadas.
+
+Responsable:
+Área de Tecnología e Innovación.
+
+----------------------------------------
+
+OBJETIVO 3
+
+Objetivo estratégico:
+Mejorar la calidad y seguridad de los sistemas desarrollados.
+
+Objetivo específico:
+Reducir incidencias técnicas y fortalecer la ciberseguridad empresarial.
+
+Indicador:
+Cantidad de incidencias reportadas mensualmente.
+
+Responsable:
+Área de Soporte y Seguridad TI.
+
+----------------------------------------
+
+OBJETIVO 4
+
+Objetivo estratégico:
+Capacitar continuamente al personal.
+
+Objetivo específico:
+Realizar programas de formación en tecnologías emergentes y ciberseguridad.
+
+Indicador:
+Número de capacitaciones realizadas por semestre.
+
+Responsable:
+Recursos Humanos.
+
+----------------------------------------
+
+OBJETIVO 5
+
+Objetivo estratégico:
+Posicionar a InnovaTech Perú como referente tecnológico regional.
+
+Objetivo específico:
+Incrementar la presencia de marca en el sur del país mediante estrategias digitales.
+
+Indicador:
+Nivel de reconocimiento de marca y nuevos convenios empresariales.
+
+Responsable:
+Marketing y Gerencia.
+========================================
+                  FODA
+========================================
+
+FORTALEZAS
+- Personal capacitado en tecnologías modernas.
+- Desarrollo de soluciones web y móviles.
+- Atención rápida y soporte eficiente.
+- Innovación constante en servicios tecnológicos.
+
+OPORTUNIDADES
+- Crecimiento de la transformación digital.
+- Mayor demanda de sistemas empresariales.
+- Expansión de servicios en la nube.
+- Posibles alianzas estratégicas con empresas.
+
+DEBILIDADES
+- Poca presencia en mercados internacionales.
+- Recursos limitados para expansión rápida.
+- Dependencia de clientes locales.
+- Infraestructura tecnológica en crecimiento.
+
+AMENAZAS
+- Alta competencia tecnológica.
+- Cambios rápidos en tendencias digitales.
+- Riesgos de ciberseguridad.
+- Crisis económicas que afectan inversiones.
+
+========================================
+            CADENA DE VALOR
+========================================
+
+ACTIVIDADES PRIMARIAS
+- Desarrollo de software.
+- Implementación de sistemas.
+- Atención al cliente.
+- Marketing digital.
+- Soporte técnico y mantenimiento.
+
+ACTIVIDADES DE APOYO
+- Gestión de recursos humanos.
+- Infraestructura tecnológica.
+- Administración financiera.
+- Investigación e innovación.
+- Capacitación del personal.
+
+REFLEXIÓN GENERAL
+
+La empresa presenta un adecuado nivel de innovación tecnológica y capacidad de adaptación al entorno digital, permitiendo ofrecer soluciones competitivas y modernas dentro del mercado tecnológico nacional.
+
+Asimismo, destaca la calidad del soporte técnico, el desarrollo continuo de soluciones digitales y la orientación hacia la satisfacción del cliente.
+
+Sin embargo, aún existen oportunidades de mejora relacionadas con la expansión empresarial y el fortalecimiento de infraestructura tecnológica.
+
+----------------------------------------
+
+FORTALEZA DETECTADA
+
+- Capacidad de innovación tecnológica y desarrollo de soluciones digitales modernas.
+
+----------------------------------------
+
+DEBILIDAD DETECTADA
+
+- Dependencia del mercado local y limitada presencia nacional.
+
+
+========================================
+               MATRIZ BCG
+========================================
+
+ESTRELLA
+- Aplicaciones móviles empresariales.
+- Sistemas inteligentes con IA.
+
+VACA LECHERA
+- Desarrollo de páginas web.
+- Servicios de soporte técnico.
+
+INTERROGANTE
+- Automatización con bots.
+- Servicios en la nube.
+
+PERRO
+- Sistemas tradicionales antiguos.
+- Servicios tecnológicos con baja demanda.
+
+========================================
