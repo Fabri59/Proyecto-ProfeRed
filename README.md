@@ -3,6 +3,24 @@
 Aplicación web empresarial para crear, gestionar y dar seguimiento a Planes Estratégicos de TI (PETI).  
 Ahora incluye frontend, backend, autenticación real y persistencia en SQLite.
 
+## Alcance implementado
+
+- Multiempresa simple con aislamiento por organización y datos persistidos en `localStorage`.
+- Registro de empresa: crea organización y primer usuario con rol `Administrador Empresa`.
+- Login normal por correo y contraseña, sin selector público de empresas.
+- Gestión de usuarios internos desde el panel del administrador.
+- RBAC por rol y área responsable del módulo.
+- Asignación de responsables solo por el Administrador Empresa, filtrada por el área del módulo y sin modificar permisos.
+- Flujo secuencial obligatorio en todos los módulos PETI implementados.
+- Bloqueo de módulos posteriores si el anterior no está completo.
+- Dashboard de avance.
+- Formularios guiados para información empresarial, misión, visión, valores, objetivos, FODA, cadena de valor, BCG, Porter, PEST, estrategia, CAME y resumen ejecutivo.
+- Autodiagnóstico completo de cadena de valor con 25 afirmaciones, escala 0-4, validaciones, porcentaje e interpretación.
+- Matriz BCG con gráfico en `canvas`, cuadrantes y cálculo de participación relativa.
+- Modales para crear, editar, eliminar, asignar responsables, aprobar y ver historial.
+- Autoguardado, historial de cambios, usuario responsable, área, fecha y versionado básico.
+- Exportación JSON del PETI.
+
 ## Stack
 
 - Frontend: HTML, CSS y JavaScript.
@@ -79,24 +97,6 @@ Producción:
 ```bash
 npm start
 ```
-
-## Alcance implementado
-
-- Multiempresa simple con aislamiento por organización y datos persistidos en `localStorage`.
-- Registro de empresa: crea organización y primer usuario con rol `Administrador Empresa`.
-- Login normal por correo y contraseña, sin selector público de empresas.
-- Gestión de usuarios internos desde el panel del administrador.
-- RBAC por rol y área responsable del módulo.
-- Asignación de responsables solo por el Administrador Empresa, filtrada por el área del módulo y sin modificar permisos.
-- Flujo secuencial obligatorio en todos los módulos PETI implementados.
-- Bloqueo de módulos posteriores si el anterior no está completo.
-- Dashboard de avance.
-- Formularios guiados para información empresarial, misión, visión, valores, objetivos, FODA, cadena de valor, BCG, Porter, PEST, estrategia, CAME y resumen ejecutivo.
-- Autodiagnóstico completo de cadena de valor con 25 afirmaciones, escala 0-4, validaciones, porcentaje e interpretación.
-- Matriz BCG con gráfico en `canvas`, cuadrantes y cálculo de participación relativa.
-- Modales para crear, editar, eliminar, asignar responsables, aprobar y ver historial.
-- Autoguardado, historial de cambios, usuario responsable, área, fecha y versionado básico.
-- Exportación JSON del PETI.
 
 
 ## Roles incluidos
