@@ -70,18 +70,15 @@ http://localhost:3000
 
 En la primera ejecución, crear una empresa desde la pantalla de registro. No se crean usuarios ni datos demo automáticamente.
 
-## Variables de entorno
+## Enlace de sistema desplegado
 
-Crear `.env`:
+http://38.250.116.71:3001/
 
 ```env
 PORT=3000
 JWT_SECRET=pon-un-secreto-largo-y-unico
-DATABASE_URL=
 DB_PATH=./data/peti.sqlite
 ```
-
-Si `DATABASE_URL` está vacío, la app usa SQLite local. Si `DATABASE_URL` tiene una cadena PostgreSQL, la app usa PostgreSQL.
 
 ## Ejecución
 
