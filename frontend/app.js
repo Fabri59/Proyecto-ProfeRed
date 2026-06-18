@@ -129,7 +129,7 @@ function createPeti(companyName, sector = "", ruc = "") {
       valueChain: { answers: {}, reflections: { strengths: [], weaknesses: [], summary: "" } },
       bcg: { products: [] },
       porter: { forces: [] },
-      pest: { answers: {}, impacts: {}, factors: [] },
+      pest: { answers: {}, impacts: {}, factors: [], customFactors: [] },
       strategy: { matrices: { fo: {}, af: {}, ad: {}, od: {} }, selected: "", reflection: "", items: [] },
       came: { actions: { correct: [], confront: [], maintain: [], exploit: [] } },
       executive: { promoters: "", conclusions: "" },
@@ -184,6 +184,7 @@ function convertPetiDataStructure(petiObj) {
   if (petiObj.data.pest && Array.isArray(petiObj.data.pest.factors)) {
     petiObj.data.pest.answers = petiObj.data.pest.answers || {};
     petiObj.data.pest.impacts = petiObj.data.pest.impacts || {};
+    petiObj.data.pest.customFactors = petiObj.data.pest.customFactors || [];
     const oldFactors = petiObj.data.pest.factors;
     const needsPestMigration = oldFactors.length > 0 && !oldFactors[0].hasOwnProperty('category');
     if (needsPestMigration) {
@@ -206,7 +207,7 @@ function convertPetiDataStructure(petiObj) {
       });
     }
   } else {
-    petiObj.data.pest = { answers: {}, impacts: {}, factors: [] };
+    petiObj.data.pest = { answers: {}, impacts: {}, factors: [], customFactors: [] };
   }
 
   // 4. Strategy
@@ -368,7 +369,6 @@ function validateValueChain() {
   }
   return { ok: true, message: "Autodiagnóstico completo." };
 }
-
 function validatePest() {
   const answers = peti().data.pest.answers || {};
   for (let i = 0; i < pestQuestions.length; i += 1) {
@@ -379,6 +379,13 @@ function validatePest() {
     if (!Number.isInteger(value) || value < 0 || value > 4) {
       return { ok: false, message: `La afirmación PEST ${i + 1} tiene una valoración inválida.` };
     }
+  }
+  // Validar que haya al menos algunas clasificaciones FODA
+  const impacts = peti().data.pest.impacts || {};
+  const customFactors = peti().data.pest.customFactors || [];
+  const hasClassifications = Object.values(impacts).some(v => v === "Oportunidad" || v === "Amenaza") || customFactors.some(f => f.classification === "Oportunidad" || f.classification === "Amenaza");
+  if (!hasClassifications) {
+    return { ok: false, message: "Debe clasificar al menos un factor PEST como Oportunidad o Amenaza para alimentar el FODA." };
   }
   return { ok: true, message: "Autodiagnóstico PEST completo." };
 }
@@ -753,7 +760,15 @@ function getFodaOpportunities() {
       source: "PEST",
       score: question.score
     }));
-  return [...porterOps, ...pestOps];
+  const customOps = (d.pest.customFactors || [])
+    .filter(f => f.classification === "Oportunidad")
+    .map(f => ({
+      id: `custom-pest-${f.id}`,
+      text: `${f.type}: ${f.description}`,
+      source: "PEST personalizado",
+      score: Number(f.rating)
+    }));
+  return [...porterOps, ...pestOps, ...customOps];
 }
 
 function getFodaThreats() {
@@ -775,7 +790,15 @@ function getFodaThreats() {
       source: "PEST",
       score: question.score
     }));
-  return [...porterThreats, ...pestThreats];
+  const customThreats = (d.pest.customFactors || [])
+    .filter(f => f.classification === "Amenaza")
+    .map(f => ({
+      id: `custom-pest-${f.id}`,
+      text: `${f.type}: ${f.description}`,
+      source: "PEST personalizado",
+      score: Number(f.rating)
+    }));
+  return [...porterThreats, ...pestThreats, ...customThreats];
 }
 
 function renderObjectives() {
@@ -974,6 +997,17 @@ function renderPest() {
     </select>`
   ]);
 
+  const customFactorsRows = (d.customFactors || []).map((factor) => [
+    `<span class="badge" style="background:#d7eef4; color:#164e63; border:none;">${esc(factor.type)}</span><br><strong>${esc(factor.description)}</strong>`,
+    `<div style="text-align:center; font-weight:bold;">${factor.rating}</div>`,
+    `<select data-custom-pest-classification="${factor.id}" class="custom-pest-classification">
+      <option value="" ${!factor.classification ? "selected" : ""}>No clasificar</option>
+      <option value="Oportunidad" ${factor.classification === "Oportunidad" ? "selected" : ""}>Oportunidad</option>
+      <option value="Amenaza" ${factor.classification === "Amenaza" ? "selected" : ""}>Amenaza</option>
+    </select>`,
+    `${rowActions("custom-pest-factor", factor.id)}`
+  ]);
+
   return `
     <div class="pest-layout">
       <section>
@@ -989,6 +1023,13 @@ function renderPest() {
     <p class="notice" style="margin-top:12px;">
       <strong>Resultado automático:</strong> Las afirmaciones marcadas como <strong>Oportunidad</strong> o <strong>Amenaza</strong> se integran al FODA con la valoración registrada en esta tabla.
     </p>
+    <section class="panel" style="margin-top:24px;">
+      <div class="panel-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom:1px solid var(--line); padding-bottom:8px; margin-bottom:12px;">
+        <h3>Factores PEST Personalizados</h3>
+        <button class="primary-btn" data-action="add-custom-pest-factor" type="button">+ Agregar factor PEST personalizado</button>
+      </div>
+      ${customFactorsRows.length > 0 ? `<div class="table-wrap"><table><thead><tr><th>Factor personalizado</th><th>Valoración</th><th>Clasificación FODA</th><th>Acciones</th></tr></thead><tbody>${customFactorsRows.map((r) => `<tr>${r.map((c) => `<td>${c}</td>`).join("")}</tr>`).join("")}</tbody></table></div>` : `<p class="notice">No hay factores PEST personalizados. Agregue factores según su contexto específico.</p>`}
+    </section>
   `;
 }
 
@@ -1190,6 +1231,17 @@ function bindModule(moduleId, readonly) {
         scheduleSave("pest", `Clasificación FODA PEST ${Number(index) + 1}`);
       });
     });
+    document.querySelectorAll("[data-custom-pest-classification]").forEach(select => {
+      select.disabled = readonly;
+      select.addEventListener("change", () => {
+        const factorId = select.dataset.customPestClassification;
+        const factor = peti().data.pest.customFactors.find(f => f.id === factorId);
+        if (factor) {
+          factor.classification = select.value || null;
+          scheduleSave("pest", `Clasificación de factor PEST personalizado`);
+        }
+      });
+    });
   }
 
   document.querySelectorAll("[data-action]").forEach((btn) => btn.addEventListener("click", () => handleAction(btn.dataset.action, btn.dataset, readonly, moduleId)));
@@ -1211,7 +1263,7 @@ function handleAction(action, data, readonly, moduleId) {
   const writeActions = [
     "add-value", "add-strategic", "add-specific",
     "add-vc-strength", "add-vc-weakness", "add-product", "add-porter-force",
-    "add-strategy-item", "add-came-action"
+    "add-strategy-item", "add-came-action", "add-custom-pest-factor"
   ];
   if ((writeActions.includes(action) || action.startsWith("edit-") || action.startsWith("delete-")) && readonly) {
     return toast("Su rol no tiene permiso de edición para este módulo.");
@@ -1225,6 +1277,8 @@ function handleAction(action, data, readonly, moduleId) {
   // Objectives
   if (action === "add-strategic") return openStrategicModal();
   if (action === "add-specific") return openSpecificModal(data.parentId);
+  if (action === "edit-specific") return editEntity("specific", data.id, data.parentId);
+  if (action === "delete-specific") return confirmDelete("specific", data.id, data.parentId);
   
   if (action === "add-vc-strength") return openTextListModal("valueChain", peti().data.valueChain.reflections.strengths, "Fortaleza detectada");
   if (action === "add-vc-weakness") return openTextListModal("valueChain", peti().data.valueChain.reflections.weaknesses, "Debilidad detectada");
@@ -1236,6 +1290,9 @@ function handleAction(action, data, readonly, moduleId) {
   
   // Matriz CAME
   if (action === "add-came-action") return openCameModal(data.kind);
+  
+  // Custom PEST factors
+  if (action === "add-custom-pest-factor") return openCustomPestFactorModal();
 
   if (action.startsWith("edit-")) return editEntity(action.replace("edit-", ""), data.id, data.kind);
   if (action.startsWith("delete-")) return confirmDelete(action.replace("delete-", ""), data.id, data.kind);
@@ -1432,6 +1489,31 @@ function openPorterForceModal(existing = null) {
   });
 }
 
+function openCustomPestFactorModal(existing = null) {
+  openFormModal(existing ? "Editar factor PEST personalizado" : "Agregar factor PEST personalizado", [
+    ["type", "Tipo de factor", existing?.type || "Político", "select", ["Político", "Económico", "Social", "Tecnológico", "Medioambiental"]],
+    ["description", "Descripción del factor", existing?.description || "", "textarea"],
+    ["rating", "Valoración (0-4)", existing?.rating ?? 2, "number"],
+    ["classification", "Clasificación FODA", existing?.classification || "", "select", [
+      { value: "", label: "No clasificar" },
+      { value: "Oportunidad", label: "Oportunidad" },
+      { value: "Amenaza", label: "Amenaza" }
+    ]]
+  ], (v) => {
+    const values = {
+      ...v,
+      rating: Math.max(0, Math.min(4, Number(v.rating)))
+    };
+    if (existing) {
+      Object.assign(existing, values);
+    } else {
+      if (!peti().data.pest.customFactors) peti().data.pest.customFactors = [];
+      peti().data.pest.customFactors.push({ id: uid("cpest"), ...values });
+    }
+    scheduleSave("pest", "Factor PEST personalizado");
+  });
+}
+
 function openStrategyModal(existing = null) {
   openFormModal(existing ? "Editar estrategia" : "Formular estrategia", [
     ["name", "Nombre de la estrategia", existing?.name || ""],
@@ -1502,7 +1584,11 @@ function editEntity(type, id, kind) {
   if (type === "specific") {
     const parent = peti().data.objectives.rows.find((r) => r.id === kind);
     const item = parent ? parent.specifics.find((sp) => sp.id === id) : null;
-    if (parent && item) return openSpecificModal(kind, item);
+    if (parent && item) return openSpecificModal(parent.id, item);
+  }
+  if (type === "custom-pest-factor") {
+    const factor = peti().data.pest.customFactors.find(f => f.id === id);
+    if (factor) return openCustomPestFactorModal(factor);
   }
   if (type === "vc-strength") return openTextListModal("valueChain", peti().data.valueChain.reflections.strengths, "Fortaleza detectada", peti().data.valueChain.reflections.strengths.find((r) => r.id === id));
   if (type === "vc-weakness") return openTextListModal("valueChain", peti().data.valueChain.reflections.weaknesses, "Debilidad detectada", peti().data.valueChain.reflections.weaknesses.find((r) => r.id === id));
@@ -1541,6 +1627,10 @@ function removeEntity(type, id, kind) {
     if (idx >= 0) list.splice(idx, 1);
   } else if (type === "came-action") {
     const list = peti().data.came.actions[kind] || [];
+    const idx = list.findIndex((r) => r.id === id);
+    if (idx >= 0) list.splice(idx, 1);
+  } else if (type === "custom-pest-factor") {
+    const list = peti().data.pest.customFactors || [];
     const idx = list.findIndex((r) => r.id === id);
     if (idx >= 0) list.splice(idx, 1);
   } else {
