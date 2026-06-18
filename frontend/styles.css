@@ -129,12 +129,6 @@ h1 {
   margin-top: 12px;
 }
 
-.demo-help {
-  margin: 16px 0 0;
-  color: var(--muted);
-  font-size: 0.9rem;
-}
-
 label {
   display: grid;
   gap: 7px;
@@ -534,7 +528,8 @@ th {
   background: #fbfdff;
 }
 
-.bcg-layout {
+.bcg-layout,
+.pest-layout {
   display: grid;
   grid-template-columns: minmax(300px, 1fr) minmax(330px, 520px);
   gap: 18px;
@@ -610,6 +605,33 @@ th {
   width: 100%;
   height: 430px;
   display: block;
+}
+
+.pest-chart-wrap {
+  position: relative;
+  min-height: 360px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  overflow: hidden;
+}
+
+#pestCanvas {
+  width: 100%;
+  height: 360px;
+  display: block;
+}
+
+.matrix-score-select {
+  width: 86px;
+  min-height: 34px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #ffffff;
+  color: var(--text);
+  font: inherit;
+  font-weight: 800;
+  text-align: center;
 }
 
 .quadrant-legend {
@@ -758,6 +780,7 @@ th {
   }
 
   .bcg-layout,
+  .pest-layout,
   .form-grid {
     grid-template-columns: 1fr;
   }

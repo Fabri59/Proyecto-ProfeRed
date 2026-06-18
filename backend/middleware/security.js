@@ -10,7 +10,9 @@ function hashPassword(password) {
 
 function verifyPassword(password, stored) {
   const [salt, originalHash] = stored.split(":");
+  if (!salt || !originalHash) return false;
   const hash = crypto.pbkdf2Sync(password, salt, 120000, 32, "sha256").toString("hex");
+  if (Buffer.byteLength(hash, "hex") !== Buffer.byteLength(originalHash, "hex")) return false;
   return crypto.timingSafeEqual(Buffer.from(hash, "hex"), Buffer.from(originalHash, "hex"));
 }
 
